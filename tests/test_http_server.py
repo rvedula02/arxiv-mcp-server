@@ -6,7 +6,7 @@ import mcp.types as types
 import pytest
 from starlette.testclient import TestClient
 
-from arxiv_mcp_server.http_server import create_app, get_abstract, search_papers
+from arxiv_mcp_server.http_server import create_app, create_mcp, get_abstract, search_papers
 
 
 def _text_result(payload: str) -> list[types.TextContent]:
@@ -33,6 +33,14 @@ def test_healthz_endpoint():
 
     assert response.status_code == 200
     assert response.json() == {"ok": True}
+
+
+def test_create_mcp_disables_localhost_host_validation():
+    server = create_mcp()
+
+    assert server.settings.host == "0.0.0.0"
+    assert server.settings.transport_security is not None
+    assert server.settings.transport_security.enable_dns_rebinding_protection is False
 
 
 @pytest.mark.asyncio
