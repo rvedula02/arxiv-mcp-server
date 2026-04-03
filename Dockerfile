@@ -26,8 +26,7 @@ FROM python:3.11-slim-bookworm
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the installed dependencies and the virtual environment
-COPY --from=uv /root/.local /root/.local
+# Copy the installed virtual environment
 COPY --from=uv /app/.venv /app/.venv
 
 # Set the PATH to include the virtual environment
