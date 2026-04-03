@@ -57,6 +57,7 @@ addopts = "-v --cov=arxiv_mcp_server"
 
 [project.scripts]
 arxiv-mcp-server = "arxiv_mcp_server:main"
+arxiv-mcp-http-server = "arxiv_mcp_server.http_server:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/arxiv_mcp_server"]

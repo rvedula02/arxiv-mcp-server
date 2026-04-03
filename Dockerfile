@@ -33,5 +33,5 @@ COPY --from=uv /app/.venv /app/.venv
 # Set the PATH to include the virtual environment
 ENV PATH="/app/.venv/bin:$PATH"
 
-# Set the default entrypoint
-ENTRYPOINT ["python", "-m", "arxiv_mcp_server"]
+# Render/ChatGPT remote deployment entrypoint
+ENTRYPOINT ["arxiv-mcp-http-server"]

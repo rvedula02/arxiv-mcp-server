@@ -112,6 +112,37 @@ Add this configuration to your MCP client config file:
 }
 ```
 
+### 🌐 Remote HTTP Deployment for ChatGPT / Render
+
+This repository now includes a separate HTTP entrypoint for remote MCP clients.
+It keeps the existing stdio server for local tools like Codex or Claude Desktop,
+and adds a read-only Streamable HTTP server for hosted deployments.
+
+- Local stdio entrypoint: `arxiv-mcp-server`
+- Remote HTTP entrypoint: `arxiv-mcp-http-server`
+- ChatGPT/remote MCP URL: `https://<your-service>.onrender.com/mcp`
+
+The hosted HTTP server intentionally exposes only these read-only tools:
+
+- `search_papers`
+- `get_abstract`
+
+This keeps a free-tier Render deployment useful without requiring persistent
+disk storage for downloaded papers.
+
+For Render:
+
+```bash
+arxiv-mcp-http-server
+```
+
+Render should use the `PORT` environment variable automatically. You can verify
+the service with:
+
+```bash
+curl https://<your-service>.onrender.com/healthz
+```
+
 For Development:
 
 ```json
